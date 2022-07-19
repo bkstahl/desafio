@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <script src="../json-formdata.js"></script>
+  <title>Cadastro</title>
+</head>
+
+<body>
+  <h1>Cadastro de Usuarios</h1>
+  
+  <form action="save" id="myForm" enctype='application/json' method="post">
+    Codigo:<input type="text" name="id" readonly="readonly" id="id" th:value="${usuario.id}"><br/>
+  	Nome:<input type="text" name="nome" th:value="${usuario.nome}"><br/>
+  	Email:<input type="text" name="email" th:value="${usuario.email}"><br/>
+  	Nascimento:<input type="text" name="nascimento" th:value="${usuario.nascimento}"><br/>
+  	Senha:<input type="password" name="senha" th:value="${usuario.senha}"><br/>
+  	<input type="hidden" name="endereco[id]" th:value="${usuario.endereco.id}"><br/>
+  	Endereco:<input type="text" name="endereco[endereco]" th:value="${usuario.endereco.endereco}"><br/>
+  	Cep:<input type="text" name="endereco[cep]" th:value="${usuario.endereco.cep}"><br/>
+  	Complemento:<input type="text" name="endereco[complemento]" th:value="${usuario.endereco.complemento}"><br/>
+	Status: <select name="status">
+	    <option  th:selected="${usuario.status == true}" th:value="true" th:text="Ativado"></option>
+	    <option  th:selected="${usuario.status == false}" th:value="false" th:text="Desativado"></option>
+	</select><br/><br/>
+  	<input type="button" id="backButton" value="Voltar" onclick=" window.location.href = '.'">
+   	<input type="button" id="deleteButton" value="Excluir" onclick="excluir()">
+   	<input type="button" id="newButton" value="Novo" onclick="limpar()">
+   	<input type="submit" id="saveButton" value="Salvar">
+  </form>
+  
+  <input type="hidden" id="logsSize" th:value="${usuario?.logs?.size()}"><br/>
+  
+  <div id="atividade">
+	  <h3>Atividades do usuario:</h3>
+	  <table>
+	    <thead>
+	      <tr>
+	        <th>Data</th>
+	        <th>Atividade</th>
+	      </tr>
+	    </thead>
+	    <tbody>
+	      <tr th:each="log: ${usuario.logs}">  
+	        <td th:text="${log.data}"></td>
+	        <td th:text="${log.log}"></td>
+	      </tr>
+	    </tbody>
+	  </table>
+  </div>
+  <br/><br/>
+  <p type="text" id="mensagem">
+
+  <script>
+ 	var logsSize = document.getElementById("logsSize").value;
+ 	if(logsSize==0){
+ 		$('#atividade').hide();
+ 	}
+ 	
+    var form = document.querySelector('form');
+    new JSONFormData(form, function (err, res) {
+    	
+    	if(err == null || err.code == 201){
+    		$("#mensagem").text("Registro salvo com sucesso!");
+    	}
+    	else if(err != null && err.message != null){
+  			var res = err.message.split('"');
+  			$("#mensagem").text(res[res.length-2]);
+    	}
+   		else{
+   			$("#mensagem").text("Nao foi possivel salvar o usuario!");
+   		}
+    });
+    
+    function limpar() {
+    	$('#myForm input').val("");
+    	$('#saveButton').val("Salvar");
+    	$('#deleteButton').val("Excluir");
+    	$('#newButton').val("Novo");
+    	$('#backButton').val("Voltar");
+    }
+    
+    function excluir() {
+    	
+    	  var id = document.getElementById("id").value;
+    	  if(id==''){
+    		  alert("Nao foi possivel realizar essa operacao!");
+    		  return;
+    	  }
+    		  
+	      var r = confirm("Confirma exclusao?");
+	      if (r){
+	    	  $.ajax({
+	    		   url: 'delete?id='+id,
+	    		   type: 'DELETE',
+	    		   success: function(response) {
+	    			   $("#mensagem").text("Registro excluido com sucesso!");
+	    		   },
+	    		   error: function(request,msg,error) {
+	    			   $("#mensagem").text("Nao foi possivel excluir o registro!");
+	    	       }
+	    	  });
+	      }
+	}
+  </script>
+
+</body>
+</html>

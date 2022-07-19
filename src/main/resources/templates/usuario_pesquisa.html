@@ -1,0 +1,48 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+  <title>Usuarios</title>
+</head>
+
+<body>
+  <h1>Usuarios</h1>
+  
+  <br/>
+  <form method="get">
+   	 Codigo:<input type="text" name="id">
+ 	 Nome:<input type="text" name="nome">
+  	<input type="submit" value="Pesquisar">
+  	<input type="button" value="Novo" onclick=" location.href = '/usuarios/cadastro'">
+  	<input type="button" value="Logout" onclick=" location.href = '/logout'"><br/><br/>
+  </form>
+  
+  <table id="myTable">
+    <thead>
+      <tr>
+        <th>Codigo</th>
+        <th>Nome</th>
+        <th>E-mail</th>
+        <th>Nascimento</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr onclick="openCad(this)" th:each="usuario: ${usuarios}">  
+        <td th:text="${usuario.id}"></td>
+        <td th:text="${usuario.nome}"></td>
+        <td th:text="${usuario.email}"></td>
+        <td th:text="${usuario.nascimento}"></td>
+        <td th:text="${usuario.status}"></td>
+      </tr>
+    </tbody>
+  </table>
+  
+  <script type="text/javascript">
+	  function openCad(x) {
+		  var id = document.getElementById("myTable").rows[x.rowIndex].cells[0].innerHTML;
+		  location.href = "/usuarios/cadastro?id="+id;
+	  }
+  </script>
+</body>
+</html>
