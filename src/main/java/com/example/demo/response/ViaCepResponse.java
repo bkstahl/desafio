@@ -1,4 +1,4 @@
-package com.example.demo.recursos.cep;
+package com.example.demo.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

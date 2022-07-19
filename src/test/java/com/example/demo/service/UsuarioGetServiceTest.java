@@ -1,4 +1,4 @@
-package com.example.demo.recursos.usuarios;
+package com.example.demo.service;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
@@ -12,8 +12,9 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.example.demo.recursos.usuarios.entity.Usuario;
-import com.example.demo.recursos.usuarios.service.UsuarioGetService;
+import com.example.demo.entity.Usuario;
+import com.example.demo.repository.UsuarioRepository;
+import com.example.demo.service.UsuarioGetService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UsuarioGetServiceTest {

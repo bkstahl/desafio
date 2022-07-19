@@ -1,4 +1,4 @@
-package com.example.demo.core.exception;
+package com.example.demo.config.exception;
 
 public class ApiException extends RuntimeException{
 	

@@ -1,4 +1,4 @@
-package com.example.demo.core.exception;
+package com.example.demo.config.exception;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.web.bind.annotation.ControllerAdvice;

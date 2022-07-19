@@ -1,4 +1,4 @@
-package com.example.demo.recursos.usuarios;
+package com.example.demo.service;
 
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.never;
@@ -15,12 +15,13 @@ import org.mockito.InjectMocks;
 import org.mockito.Mock;
 import org.mockito.junit.MockitoJUnitRunner;
 
-import com.example.demo.core.exception.ApiException;
-import com.example.demo.recursos.cep.ViaCepClient;
-import com.example.demo.recursos.cep.ViaCepResponse;
-import com.example.demo.recursos.usuarios.entity.Endereco;
-import com.example.demo.recursos.usuarios.entity.Usuario;
-import com.example.demo.recursos.usuarios.service.UsuarioSaveService;
+import com.example.demo.client.ViaCepClient;
+import com.example.demo.config.exception.ApiException;
+import com.example.demo.entity.Endereco;
+import com.example.demo.entity.Usuario;
+import com.example.demo.repository.UsuarioRepository;
+import com.example.demo.response.ViaCepResponse;
+import com.example.demo.service.UsuarioSaveService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UsuarioSaveServiceTest {

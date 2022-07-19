@@ -1,12 +1,12 @@
-package com.example.demo.recursos.logs.service;
+package com.example.demo.service;
 
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.recursos.logs.LogRepository;
-import com.example.demo.recursos.usuarios.entity.Log;
+import com.example.demo.entity.Log;
+import com.example.demo.repository.LogRepository;
 
 @Service
 public class LogFindService {

@@ -1,4 +1,4 @@
-package com.example.demo.recursos.usuarios.service;
+package com.example.demo.service;
 
 import java.util.Calendar;
 
@@ -6,11 +6,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.core.exception.ApiException;
-import com.example.demo.recursos.cep.ViaCepClient;
-import com.example.demo.recursos.cep.ViaCepResponse;
-import com.example.demo.recursos.usuarios.UsuarioRepository;
-import com.example.demo.recursos.usuarios.entity.Usuario;
+import com.example.demo.client.ViaCepClient;
+import com.example.demo.config.exception.ApiException;
+import com.example.demo.entity.Usuario;
+import com.example.demo.repository.UsuarioRepository;
+import com.example.demo.response.ViaCepResponse;
 
 @Service
 public class UsuarioSaveService {

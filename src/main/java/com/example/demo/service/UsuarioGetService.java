@@ -1,11 +1,11 @@
-package com.example.demo.recursos.usuarios.service;
+package com.example.demo.service;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.recursos.usuarios.UsuarioRepository;
-import com.example.demo.recursos.usuarios.entity.Endereco;
-import com.example.demo.recursos.usuarios.entity.Usuario;
+import com.example.demo.entity.Endereco;
+import com.example.demo.entity.Usuario;
+import com.example.demo.repository.UsuarioRepository;
 
 @Service
 public class UsuarioGetService {

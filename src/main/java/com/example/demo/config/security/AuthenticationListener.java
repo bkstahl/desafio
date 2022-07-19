@@ -5,7 +5,7 @@ import org.springframework.context.ApplicationListener;
 import org.springframework.security.authentication.event.InteractiveAuthenticationSuccessEvent;
 import org.springframework.stereotype.Component;
 
-import com.example.demo.recursos.logs.service.LogSaveService;
+import com.example.demo.service.LogSaveService;
 
 @Component
 public class AuthenticationListener implements ApplicationListener<InteractiveAuthenticationSuccessEvent> {

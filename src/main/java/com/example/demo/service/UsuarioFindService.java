@@ -1,4 +1,4 @@
-package com.example.demo.recursos.usuarios.service;
+package com.example.demo.service;
 
 import java.util.List;
 
@@ -7,8 +7,8 @@ import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
 import org.springframework.stereotype.Service;
 
-import com.example.demo.recursos.usuarios.UsuarioRepository;
-import com.example.demo.recursos.usuarios.entity.Usuario;
+import com.example.demo.entity.Usuario;
+import com.example.demo.repository.UsuarioRepository;
 
 /**
  * Referência:
