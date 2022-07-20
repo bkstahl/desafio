@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.core.context.SecurityContextHolder;
@@ -23,7 +23,7 @@ public class LogSaveService {
 		Log log = Log.builder()
 				.log(tipo)
 				.usuario(usuarioLogado)
-				.data(Calendar.getInstance().getTime())
+				.data(LocalDate.now())
 				.build();
 		
 		repository.save(log);

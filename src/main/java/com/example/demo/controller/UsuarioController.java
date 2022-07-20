@@ -16,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.servlet.ModelAndView;
 
 import com.example.demo.entity.Usuario;
+import com.example.demo.response.UsuarioResponse;
 import com.example.demo.service.UsuarioDeleteService;
 import com.example.demo.service.UsuarioFindService;
 import com.example.demo.service.UsuarioGetService;
@@ -24,6 +25,9 @@ import com.example.demo.service.UsuarioSaveService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
+/**
+ * @author bruno
+ */
 @Controller
 @RequestMapping("/usuarios")
 @Api(value = "API Usuários")
@@ -41,33 +45,13 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioSaveService usuarioSaveService;
 	
-	@GetMapping
-	public ModelAndView listagem(
-			@RequestParam(required=false) Long id,
-			@RequestParam(required=false) String nome) {
-		
-		List<Usuario> lista = usuarioFindService.execute(id, nome);
-		ModelAndView modelAndView = new ModelAndView("usuario_pesquisa");		
-		modelAndView.addObject("usuarios", lista);
-		return modelAndView;
-	}
-
-	@GetMapping(value="/cadastro")
-	public ModelAndView cadastro(
-			@RequestParam(required=false) Long id) {
-		
-		ModelAndView modelAndView = new ModelAndView("usuario_cadastro");
-		modelAndView.addObject("usuario", usuarioGetService.execute(id));
-		return modelAndView;
-	}
-
 	@GetMapping(value="/get")
 	@ApiOperation(value = "Listagem de usuários")
-	public ResponseEntity<List<Usuario>> get(
+	public ResponseEntity<List<UsuarioResponse>> get(
 			@RequestParam(required=false) Long id,
 			@RequestParam(required=false) String nome) {
 		
-		List<Usuario> lista = usuarioFindService.execute(id, nome);
+		List<UsuarioResponse> lista = usuarioFindService.execute(id, nome);
 		return ResponseEntity.ok(lista);
 	}
 	
@@ -94,5 +78,28 @@ public class UsuarioController {
 			@PathVariable("pass") String pass) {
 		
 		return ResponseEntity.ok(new BCryptPasswordEncoder().encode(pass));
+	}
+	
+	/*
+	 * Para utilização via Thymeleaf
+	 */
+	@GetMapping
+	public ModelAndView listagem(
+			@RequestParam(required=false) Long id,
+			@RequestParam(required=false) String nome) {
+		
+		List<UsuarioResponse> lista = usuarioFindService.execute(id, nome);
+		ModelAndView modelAndView = new ModelAndView("usuario_pesquisa");		
+		modelAndView.addObject("usuarios", lista);
+		return modelAndView;
+	}
+
+	@GetMapping(value="/cadastro")
+	public ModelAndView cadastro(
+			@RequestParam(required=false) Long id) {
+		
+		ModelAndView modelAndView = new ModelAndView("usuario_cadastro");
+		modelAndView.addObject("usuario", usuarioGetService.execute(id));
+		return modelAndView;
 	}
 }

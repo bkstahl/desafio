@@ -1,6 +1,6 @@
 package com.example.demo.service;
 
-import java.util.Calendar;
+import java.time.LocalDate;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
@@ -46,7 +46,7 @@ public class UsuarioSaveService {
 		if(usuario.getNome().split(" ").length <= 1)
 			throw new ApiException("Campo 'Nome' deve possuir mais de uma palavra");
 		
-		if(usuario.getNascimento() != null && usuario.getNascimento().after(Calendar.getInstance().getTime()))
+		if(usuario.getNascimento() != null && usuario.getNascimento().isAfter(LocalDate.now()))
 			throw new ApiException("Campo 'Nascimento' não pode ser maior que a data atual");
 		
 		if(usuario.getEndereco() == null || usuario.getEndereco().getCep() == null)

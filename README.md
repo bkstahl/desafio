@@ -1,13 +1,13 @@
 # Desafio
 
-Projeto API desafio CWI Software para utilização como exemplo base.
+Projeto API desafio CWI Software para utilização como exemplo em treinamentos.
            
 ## Requisitos funcionais
 
 - Manter informação de usuários (adição, alteração e remoção)
      - O campo 'Nome' deve possuir mais de uma palavra
      - O campo 'CEP' deve ser válidado
-     - O campo 'E-mail' deve conter o caractere @
+     - O campo 'E-mail' deve conter o caractere arroba '@'
      - O campo 'Nascimento' não pode ser maior que a data atual
      - Devem ser obrigatórios os campos 'Nome', 'CEP' e 'E-mail'
 - Permitir a visualização e pesquisa de usuários cadastrados
@@ -27,19 +27,25 @@ Projeto API desafio CWI Software para utilização como exemplo base.
 ### Endereços
 
 - **Documentação Swagger: ** [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
-- **Banco de dados H2: ** [http://localhost:8080/h2/](http://localhost:8080/h2/)
+- **Banco de dados: ** [http://localhost:8080/h2/](http://localhost:8080/h2/)
 - **Página Web: ** [http://localhost:8080/login](http://localhost:8080/login)
-  
+
 ### Inicialização
 ```shell
 mvn clean install spring-boot: run
 ```
+
+A cada inicialização o banco de dados será zerado e o de importação será executado 'import.sql'
+
 ### Tecnologias utilizadas
 - Java 11
 - Spring boot
 - Spring Security
 - Spring Fox
-- H2
-- Lombok
+- Thymeleaf
 - JUnit
 - Mockito
+- H2
+- Devtools
+- Lombok
+- ModelMapper

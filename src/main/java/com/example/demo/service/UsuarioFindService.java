@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
+import org.modelmapper.ModelMapper;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.data.domain.Example;
 import org.springframework.data.domain.ExampleMatcher;
@@ -9,6 +11,7 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.repository.UsuarioRepository;
+import com.example.demo.response.UsuarioResponse;
 
 /**
  * Referência:
@@ -18,9 +21,12 @@ import com.example.demo.repository.UsuarioRepository;
 public class UsuarioFindService {
 
 	@Autowired
+	private ModelMapper modelMapper;
+	
+	@Autowired
 	private UsuarioRepository usuarioRepository;
 
-	public List<Usuario> execute(Long id, String nome) {
+	public List<UsuarioResponse> execute(Long id, String nome) {
 
 		ExampleMatcher matcher = ExampleMatcher
 				.matching()
@@ -33,6 +39,9 @@ public class UsuarioFindService {
 				.nome(nome)
 				.build(), matcher);
 
-		return usuarioRepository.findAll(example);
+		return usuarioRepository.findAll(example)
+				.stream()
+				.map(user -> modelMapper.map(user, UsuarioResponse.class))
+				.collect(Collectors.toList());
 	}
 }

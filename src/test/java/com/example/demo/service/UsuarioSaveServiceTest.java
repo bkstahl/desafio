@@ -6,7 +6,7 @@ import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.nio.charset.Charset;
-import java.util.Calendar;
+import java.time.LocalDate;
 import java.util.Random;
 
 import org.junit.Test;
@@ -21,7 +21,6 @@ import com.example.demo.entity.Endereco;
 import com.example.demo.entity.Usuario;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.response.ViaCepResponse;
-import com.example.demo.service.UsuarioSaveService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UsuarioSaveServiceTest {
@@ -93,11 +92,8 @@ public class UsuarioSaveServiceTest {
 		when(viaCepClient.getCep(any(Integer.class)))
 			.thenReturn(createViaCepResponseMock());
 		
-		Calendar nascimentoMaiorQueDataAtual = Calendar.getInstance();
-		nascimentoMaiorQueDataAtual.add(Calendar.DAY_OF_MONTH , 2);
-		
 		Usuario usuario = getUsuarioSucesso();
-		usuario.setNascimento(nascimentoMaiorQueDataAtual.getTime());
+		usuario.setNascimento(LocalDate.now().plusMonths(2));
 		
 		service.execute(usuario);
 
@@ -124,7 +120,7 @@ public class UsuarioSaveServiceTest {
 				.nome("Nome Pessoa")
 				.email("pessoa@email.com")
 				.senha(getRandonString())
-				.nascimento(Calendar.getInstance().getTime())
+				.nascimento(LocalDate.now())
 				.endereco(Endereco.builder().cep(93320400).build())
 				.status(true)
 				.build();

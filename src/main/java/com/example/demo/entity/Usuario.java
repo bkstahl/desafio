@@ -1,7 +1,7 @@
 package com.example.demo.entity;
 
+import java.time.LocalDate;
 import java.util.Collection;
-import java.util.Date;
 import java.util.List;
 
 import javax.persistence.CascadeType;
@@ -37,7 +37,8 @@ public class Usuario implements UserDetails{
 	private String nome;
 	private String email;
 	private String senha;
-	private Date nascimento;
+	
+	private LocalDate nascimento;
 	private Boolean status;
 	
 	@OneToOne(orphanRemoval = true, cascade = CascadeType.ALL, fetch = FetchType.LAZY)

@@ -1,6 +1,6 @@
 package com.example.demo.entity;
 
-import java.util.Date;
+import java.time.LocalDate;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -10,8 +10,6 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
-import javax.persistence.Temporal;
-import javax.persistence.TemporalType;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -35,8 +33,7 @@ public class Log {
 	private Usuario usuario;
 	
 	@Column(nullable=false)
-	@Temporal(TemporalType.TIME)
-	private Date data;
+	private LocalDate data;
 
 	private String log;
 }
