@@ -5,10 +5,8 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.security.crypto.bcrypt.BCryptPasswordEncoder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
@@ -25,9 +23,6 @@ import com.example.demo.service.UsuarioSaveService;
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
 
-/**
- * @author bruno
- */
 @Controller
 @RequestMapping("/usuarios")
 @Api(value = "API Usuários")
@@ -45,7 +40,7 @@ public class UsuarioController {
 	@Autowired
 	private UsuarioSaveService usuarioSaveService;
 	
-	@GetMapping(value="/get")
+	@GetMapping(value="/find")
 	@ApiOperation(value = "Listagem de usuários")
 	public ResponseEntity<List<UsuarioResponse>> get(
 			@RequestParam(required=false) Long id,
@@ -73,15 +68,8 @@ public class UsuarioController {
 		return ResponseEntity.noContent().build();
 	}
 	
-	@RequestMapping(value="/pass/{pass}", method=RequestMethod.GET)
-	public ResponseEntity<String> pass(
-			@PathVariable("pass") String pass) {
-		
-		return ResponseEntity.ok(new BCryptPasswordEncoder().encode(pass));
-	}
-	
 	/*
-	 * Para utilização via Thymeleaf
+	 * Utilização via Thymeleaf
 	 */
 	@GetMapping
 	public ModelAndView listagem(

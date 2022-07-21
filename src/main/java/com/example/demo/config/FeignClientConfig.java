@@ -11,7 +11,7 @@ import lombok.extern.slf4j.Slf4j;
 @Configuration
 @EnableFeignClients
 @Slf4j
-public class FeignClientConfiguration {
+public class FeignClientConfig {
 
 	@Bean
 	Retryer retryer() {

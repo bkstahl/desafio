@@ -14,12 +14,13 @@ import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.response.UsuarioResponse;
 
 /**
- * Referência:
- * www.logicbig.com/tutorials/spring-framework/spring-data/query-example-matchers.html
+ * Referências:
+ * http://www.logicbig.com/tutorials/spring-framework/spring-data/query-example-matchers.html
+ * http://modelmapper.org/getting-started/
  */
 @Service
 public class UsuarioFindService {
-
+	
 	@Autowired
 	private ModelMapper modelMapper;
 	
@@ -41,7 +42,7 @@ public class UsuarioFindService {
 
 		return usuarioRepository.findAll(example)
 				.stream()
-				.map(user -> modelMapper.map(user, UsuarioResponse.class))
+				.map(usuario -> modelMapper.map(usuario, UsuarioResponse.class))
 				.collect(Collectors.toList());
 	}
 }

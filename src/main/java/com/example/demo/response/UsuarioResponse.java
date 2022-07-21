@@ -2,11 +2,20 @@ package com.example.demo.response;
 
 import java.time.LocalDate;
 
-public interface UsuarioResponse {
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
+
+@Data
+@NoArgsConstructor
+@AllArgsConstructor
+@Builder
+public class UsuarioResponse {
 	
-	Long getId();
-	String getNome();
-	String getEmail();
-	LocalDate getNascimento();
-	Boolean getStatus();
+	private Long id;
+	private String nome;
+	private String email;
+	private LocalDate nascimento;
+	private Boolean status;
 }

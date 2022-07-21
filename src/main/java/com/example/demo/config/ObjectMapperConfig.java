@@ -11,7 +11,7 @@ import javax.annotation.PostConstruct;
 import java.util.TimeZone;
 
 @Configuration
-public class ObjectMapperConfiguration {
+public class ObjectMapperConfig {
 
     @Autowired
     private ObjectMapper objectMapper;
