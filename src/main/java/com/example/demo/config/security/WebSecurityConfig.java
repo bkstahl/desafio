@@ -22,7 +22,10 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	protected void configure(HttpSecurity http) throws Exception {
-		http.csrf().disable().authorizeRequests()
+		http.csrf().disable()
+			.authorizeRequests()
+			.antMatchers("/authenticate").permitAll()
+			.antMatchers("/swagger-ui/**").permitAll()
 			.antMatchers(HttpMethod.GET, "/usuarios/pass/**").permitAll()
 			.anyRequest().authenticated()
 			.and().formLogin().permitAll()
@@ -42,9 +45,14 @@ public class WebSecurityConfig extends WebSecurityConfigurerAdapter {
 	
 	@Override
 	public void configure(WebSecurity web) throws Exception {
-		web.ignoring().antMatchers("/spring.png")
-			.and().ignoring().antMatchers(HttpMethod.GET, "/swagger-ui/**")
-			.and().ignoring().antMatchers("/h2-console/**")
-			.and().ignoring().antMatchers("/h2/**");
+		web.ignoring().antMatchers(
+				"/v2/api-docs",
+				"/configuration/ui",
+				"/swagger-resources/**",
+				"/configuration/security",
+				"/swagger-ui.html",
+				"/webjars/**",
+				"/h2-console/**",
+				"/h2/**");
 	}
 }
