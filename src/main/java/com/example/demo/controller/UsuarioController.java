@@ -72,6 +72,7 @@ public class UsuarioController {
 	 * Utilização via Thymeleaf
 	 */
 	@GetMapping
+	@ApiOperation(value = "", hidden = true)
 	public ModelAndView listagem(
 			@RequestParam(required=false) Long id,
 			@RequestParam(required=false) String nome) {
@@ -83,6 +84,7 @@ public class UsuarioController {
 	}
 
 	@GetMapping(value="/cadastro")
+	@ApiOperation(value = "", hidden = true)
 	public ModelAndView cadastro(
 			@RequestParam(required=false) Long id) {
 		
