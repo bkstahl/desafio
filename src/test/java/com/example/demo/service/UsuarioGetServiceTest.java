@@ -14,7 +14,6 @@ import org.mockito.junit.MockitoJUnitRunner;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.repository.UsuarioRepository;
-import com.example.demo.service.UsuarioGetService;
 
 @RunWith(MockitoJUnitRunner.class)
 public class UsuarioGetServiceTest {
