@@ -56,7 +56,7 @@ public class UsuarioController {
 			@RequestBody Usuario usuario) {
 		
 		usuarioSaveService.execute(usuario);
-		return ResponseEntity.status(HttpStatus.OK).build();
+		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
 
 	@RequestMapping(value="/delete" , method=RequestMethod.DELETE)
