@@ -9,11 +9,11 @@ import java.nio.charset.Charset;
 import java.time.LocalDate;
 import java.util.Random;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Assertions;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.client.ViaCepClient;
 import com.example.demo.config.exception.ApiException;
@@ -22,7 +22,7 @@ import com.example.demo.entity.Usuario;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.response.ViaCepResponse;
 
-@RunWith(MockitoJUnitRunner.class)
+@SpringBootTest
 public class UsuarioSaveServiceTest {
 
 	@InjectMocks
@@ -47,70 +47,81 @@ public class UsuarioSaveServiceTest {
 		verify(repository).save(any(Usuario.class));
 	}
 
-	@Test(expected = ApiException.class)
+	@Test
 	public void deveOcorrerErroQuandoSalvarUsuarioSemNome(){
 
-		when(viaCepClient.getCep(any(Integer.class)))
-			.thenReturn(createViaCepResponseMock());
+		Assertions.assertThrows(ApiException.class, () -> {
+			
+			when(viaCepClient.getCep(any(Integer.class)))
+				.thenReturn(createViaCepResponseMock());
 		
-		Usuario usuario = getUsuarioSucesso();
-		usuario.setNome(null);
-
-		service.execute(usuario);
-
-		verify(repository, never()).save(any(Usuario.class));
+			Usuario usuario = getUsuarioSucesso();
+			usuario.setNome(null);
+	
+			service.execute(usuario);
+	
+			verify(repository, never()).save(any(Usuario.class));
+		});
 	}
 
-	@Test(expected = ApiException.class)
+	@Test
 	public void deveOcorrerErroQuandoCampoNomeTiverSomenteUmaPalavra() {
-
-		Usuario usuario = getUsuarioSucesso();
-		usuario.setNome("Nome");
-
-		service.execute(usuario);
-
-		verify(repository, never()).save(any(Usuario.class));
+		
+		Assertions.assertThrows(ApiException.class, () -> {
+			Usuario usuario = getUsuarioSucesso();
+			usuario.setNome("Nome");
+	
+			service.execute(usuario);
+	
+			verify(repository, never()).save(any(Usuario.class));
+		});
 	}
 	
-	@Test(expected = ApiException.class)
+	@Test
 	public void deveOcorrerErroQuandoEmailForInvalido() {
 
-		when(viaCepClient.getCep(any(Integer.class)))
-			.thenReturn(createViaCepResponseMock());
-		
-		Usuario usuario = getUsuarioSucesso();
-		usuario.setEmail("pessoa.com");
-		
-		service.execute(usuario);
-
-		verify(repository, never()).save(any(Usuario.class));
+		Assertions.assertThrows(ApiException.class, () -> {
+			when(viaCepClient.getCep(any(Integer.class)))
+				.thenReturn(createViaCepResponseMock());
+			
+			Usuario usuario = getUsuarioSucesso();
+			usuario.setEmail("pessoa.com");
+			
+			service.execute(usuario);
+	
+			verify(repository, never()).save(any(Usuario.class));
+		});
 	}
 	
-	@Test(expected = ApiException.class)
+	@Test
 	public void deveOcorrerErroQuandoDataNascimentoForMaiorQueAgora() {
 
-		when(viaCepClient.getCep(any(Integer.class)))
-			.thenReturn(createViaCepResponseMock());
-		
-		Usuario usuario = getUsuarioSucesso();
-		usuario.setNascimento(LocalDate.now().plusMonths(2));
-		
-		service.execute(usuario);
-
-		verify(repository, never()).save(any(Usuario.class));
+		Assertions.assertThrows(ApiException.class, () -> {
+			when(viaCepClient.getCep(any(Integer.class)))
+				.thenReturn(createViaCepResponseMock());
+			
+			Usuario usuario = getUsuarioSucesso();
+			usuario.setNascimento(LocalDate.now().plusMonths(2));
+			
+			service.execute(usuario);
+	
+			verify(repository, never()).save(any(Usuario.class));
+		});
 	}
 
-	@Test(expected = ApiException.class)
+	@Test
 	public void deveOcorrerErroQuandoCepForInvalido(){
-
-		when(viaCepClient.getCep(any(Integer.class)))
-			.thenThrow(new RuntimeException());
 		
-		Usuario usuario = getUsuarioSucesso();
-		
-		service.execute(usuario);
-
-		verify(repository, never()).save(any(Usuario.class));
+		Assertions.assertThrows(ApiException.class, () -> {
+			when(viaCepClient.getCep(any(Integer.class)))
+				.thenThrow(new RuntimeException());
+			
+			Usuario usuario = getUsuarioSucesso();
+			
+			service.execute(usuario);
+	
+			verify(repository, never()).save(any(Usuario.class));
+		});
 	}
 	
 	private static Usuario getUsuarioSucesso() {

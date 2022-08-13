@@ -6,16 +6,15 @@ import static org.mockito.Mockito.when;
 
 import java.util.Random;
 
-import org.junit.Test;
-import org.junit.runner.RunWith;
+import org.junit.jupiter.api.Test;
 import org.mockito.InjectMocks;
 import org.mockito.Mock;
-import org.mockito.junit.MockitoJUnitRunner;
+import org.springframework.boot.test.context.SpringBootTest;
 
 import com.example.demo.entity.Usuario;
 import com.example.demo.repository.UsuarioRepository;
 
-@RunWith(MockitoJUnitRunner.class)
+@SpringBootTest
 public class UsuarioGetServiceTest {
 
 	@InjectMocks

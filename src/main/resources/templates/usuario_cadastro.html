@@ -14,11 +14,11 @@
     Codigo:<input type="text" name="id" readonly="readonly" id="id" th:value="${usuario.id}"><br/>
   	Nome:<input type="text" name="nome" th:value="${usuario.nome}"><br/>
   	Email:<input type="text" name="email" th:value="${usuario.email}"><br/>
-  	Nascimento:<input type="text" name="nascimento" th:value="${usuario.nascimento}"> yyy-mm-dd<br/>
+  	Nascimento:<input type="text" name="nascimento" th:value="${usuario.nascimento}"> yyyy-mm-dd<br/>
   	Senha:<input type="password" name="senha" th:value="${usuario.senha}"><br/>
   	<input type="hidden" name="endereco[id]" th:value="${usuario.endereco.id}"><br/>
   	Endereco:<input type="text" name="endereco[endereco]" th:value="${usuario.endereco.endereco}"><br/>
-  	Cep:<input type="text" name="endereco[cep]" th:value="${usuario.endereco.cep}"><br/>
+  	Cep:<input type="number" name="endereco[cep]" th:value="${usuario.endereco.cep}"><br/>
   	Complemento:<input type="text" name="endereco[complemento]" th:value="${usuario.endereco.complemento}"><br/>
 	Status: <select name="status">
 	    <option  th:selected="${usuario.status == true}" th:value="true" th:text="Ativado"></option>
