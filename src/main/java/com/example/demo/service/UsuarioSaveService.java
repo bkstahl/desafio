@@ -15,49 +15,57 @@ import com.example.demo.response.ViaCepResponse;
 @Service
 public class UsuarioSaveService {
 
+	public static String CAMPO_NOME_OBRIGATORIO = "Campo 'Nome' é obrigatório";
+	public static String CAMPO_EMAIL_OBRIGATORIO = "Campo 'Email' é obrigatório";
+	public static String CAMPO_EMAIL_INVALIDO = "Campo 'Email' é inválido";
+	public static String CAMPO_NOME_INVALIDO = "Campo 'Nome' deve possuir mais de uma palavra";
+	public static String CAMPO_NASCIMENTO_INVALIDO = "Campo 'Nascimento' não pode ser maior que a data atual";
+	public static String CAMPO_ENDERECO_OBRIGATORIO = "Campo 'Endereço' é obrigatório";
+	public static String CAMPO_CEP_INVALIDO = "O CEP informado não é válido";
+
 	@Autowired
 	private UsuarioRepository usuarioRepository;
 
 	@Autowired
 	private ViaCepClient viaCepClient;
-	
+
 	public void execute(Usuario usuario){
 
 		validaRegrasDeNegocio(usuario);
 		realizaCriptografiaSenhaUsuario(usuario);
 		usuarioRepository.save(usuario);
 	}
-	
+
 	private void realizaCriptografiaSenhaUsuario(Usuario usuario) {
 		usuario.setSenha(new BCryptPasswordEncoder().encode(usuario.getSenha()));
 	}
-	
+
 	private void validaRegrasDeNegocio(Usuario usuario) {
-		
+
 		if(usuario.getNome() == null)
-			throw new ApiException("Campo 'Nome' é obrigatório");
-		
+			throw new ApiException(CAMPO_NOME_OBRIGATORIO);
+
 		if(usuario.getEmail() == null)
-			throw new ApiException("Campo 'Email' é obrigatório");
-		
+			throw new ApiException(CAMPO_EMAIL_OBRIGATORIO);
+
 		if(!usuario.getEmail().contains("@"))
-			throw new ApiException("Campo 'Email' é inválido");
-		
+			throw new ApiException(CAMPO_EMAIL_INVALIDO);
+
 		if(usuario.getNome().split(" ").length <= 1)
-			throw new ApiException("Campo 'Nome' deve possuir mais de uma palavra");
-		
+			throw new ApiException(CAMPO_NOME_INVALIDO);
+
 		if(usuario.getNascimento() != null && usuario.getNascimento().isAfter(LocalDate.now()))
-			throw new ApiException("Campo 'Nascimento' não pode ser maior que a data atual");
-		
+			throw new ApiException(CAMPO_NASCIMENTO_INVALIDO);
+
 		if(usuario.getEndereco() == null || usuario.getEndereco().getCep() == null)
-			throw new ApiException("Campo 'Endereço' é obrigatório");
-		
+			throw new ApiException(CAMPO_ENDERECO_OBRIGATORIO);
+
 		try {
 			ViaCepResponse viaCepResponse = viaCepClient.getCep(usuario.getEndereco().getCep());
 			if(viaCepResponse == null)
-				throw new ApiException("O CEP informado não é válido");
+				throw new ApiException(CAMPO_CEP_INVALIDO);
 		} catch (Exception e) {
-			throw new ApiException("O CEP informado não é válido");
+			throw new ApiException(CAMPO_CEP_INVALIDO);
 		}
 	}
 }
