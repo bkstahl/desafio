@@ -49,3 +49,5 @@ A cada inicialização o banco de dados será zerado e o de importação será e
 - Devtools
 - Lombok
 - ModelMapper
+- Docker
+- Docker compose
