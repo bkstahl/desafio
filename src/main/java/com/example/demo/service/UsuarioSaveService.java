@@ -9,9 +9,13 @@ import org.springframework.stereotype.Service;
 import com.example.demo.client.ViaCepClient;
 import com.example.demo.config.exception.ApiException;
 import com.example.demo.entity.Usuario;
+import com.example.demo.producer.UsuarioSaveProducer;
 import com.example.demo.repository.UsuarioRepository;
 import com.example.demo.response.ViaCepResponse;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class UsuarioSaveService {
 
@@ -28,12 +32,19 @@ public class UsuarioSaveService {
 
 	@Autowired
 	private ViaCepClient viaCepClient;
-
+	
+	@Autowired
+	private UsuarioSaveProducer usuarioSaveProducer;
+	
 	public void execute(Usuario usuario){
-
 		validaRegrasDeNegocio(usuario);
 		realizaCriptografiaSenhaUsuario(usuario);
-		usuarioRepository.save(usuario);
+		usuario = usuarioRepository.save(usuario);
+		logSucesso(usuario);
+	}
+
+	public void executeAsync(Usuario usuario){
+		usuarioSaveProducer.sendMessage(usuario);
 	}
 
 	private void realizaCriptografiaSenhaUsuario(Usuario usuario) {
@@ -67,5 +78,9 @@ public class UsuarioSaveService {
 		} catch (Exception e) {
 			throw new ApiException(CAMPO_CEP_INVALIDO);
 		}
+	}
+
+	private void logSucesso(Usuario usuario) {
+		log.info("Salvamento do usuário "+usuario.getId()+ " realizado com sucesso");
 	}
 }

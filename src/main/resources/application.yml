@@ -1,6 +1,6 @@
 server:
   port: 8080
-  
+
 spring:
   h2:
     console:
@@ -37,3 +37,8 @@ swagger:
   develloper-email: desenvolvedor@gmail.com
   licence: Apache License Version 2.0
   licence-url: https://www.apache.org/licesen.html
+
+kafka:
+  bootstrapAddress: localhost:9092
+  usuarioSaveTopic: usuarioSaveTopic
+  usuarioGroupId: usuario

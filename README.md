@@ -27,12 +27,19 @@ Projeto API desafio CWI Software para utilização como exemplo em treinamentos.
 ### Endereços
 
 - **Documentação Swagger: ** [http://localhost:8080/swagger-ui/index.html](http://localhost:8080/swagger-ui/index.html)
+- **Página Web: ** [http://localhost:8080/login](http://localhost:8080/login) Usuário (bkstahl@gmail.com) e senha (123)
 - **Banco de dados: ** [http://localhost:8080/h2/](http://localhost:8080/h2/)
-- **Página Web: ** [http://localhost:8080/login](http://localhost:8080/login)
+- **Kafka: ** [http://localhost:19000](http://localhost:19000)
 
-### Inicialização
+### Inicialização API
 ```shell
 mvn clean install spring-boot: run
+```
+
+### Inicialização Kafka
+```shell
+cd docker
+docker-compose -f docker-compose.yml up
 ```
 
 A cada inicialização o banco de dados será zerado e o de importação será executado 'import.sql'
@@ -49,5 +56,6 @@ A cada inicialização o banco de dados será zerado e o de importação será e
 - Devtools
 - Lombok
 - ModelMapper
+- Kafka
 - Docker
 - Docker compose

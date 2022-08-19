@@ -16,7 +16,7 @@
   	Email:<input type="text" name="email" th:value="${usuario.email}"><br/>
   	Nascimento:<input type="text" name="nascimento" th:value="${usuario.nascimento}"> yyyy-mm-dd<br/>
   	Senha:<input type="password" name="senha" th:value="${usuario.senha}"><br/>
-  	<input type="hidden" name="endereco[id]" th:value="${usuario.endereco.id}"><br/>
+  	<input type="hidden" name="endereco[id]" th:value="${usuario.endereco.id}" autocomplete="off"><br/>
   	Endereco:<input type="text" name="endereco[endereco]" th:value="${usuario.endereco.endereco}"><br/>
   	Cep:<input type="number" name="endereco[cep]" th:value="${usuario.endereco.cep}"><br/>
   	Complemento:<input type="text" name="endereco[complemento]" th:value="${usuario.endereco.complemento}"><br/>

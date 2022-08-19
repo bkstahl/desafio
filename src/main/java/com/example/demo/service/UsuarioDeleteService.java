@@ -5,6 +5,9 @@ import org.springframework.stereotype.Service;
 
 import com.example.demo.repository.UsuarioRepository;
 
+import lombok.extern.slf4j.Slf4j;
+
+@Slf4j
 @Service
 public class UsuarioDeleteService {
 
@@ -13,5 +16,10 @@ public class UsuarioDeleteService {
 
 	public void execute(Long id) {
 		usuarioRepository.deleteById(id);
+		logSucesso(id);
+	}
+	
+	private void logSucesso(Long id) {
+		log.info("Remoção do usuário "+id+ " realizada com sucesso");
 	}
 }

@@ -43,7 +43,7 @@ public class SwaggerConfig {
 	private String basePackage;
 
 	@Bean
-	public Docket productApi() {
+	Docket productApi() {
 		return new Docket(DocumentationType.SWAGGER_2)
 			.select()
 			.apis(RequestHandlerSelectors.basePackage(basePackage))

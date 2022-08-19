@@ -58,6 +58,15 @@ public class UsuarioController {
 		usuarioSaveService.execute(usuario);
 		return ResponseEntity.status(HttpStatus.CREATED).build();
 	}
+	
+	@RequestMapping(value="/save/v2" , method=RequestMethod.POST)
+	@ApiOperation(value = "Alteração de usuários")
+	public ResponseEntity<Usuario> saveAsync(
+			@RequestBody Usuario usuario) {
+		
+		usuarioSaveService.executeAsync(usuario);
+		return ResponseEntity.status(HttpStatus.CREATED).build();
+	}
 
 	@RequestMapping(value="/delete" , method=RequestMethod.DELETE)
 	@ApiOperation(value = "Remoção de usuários")
